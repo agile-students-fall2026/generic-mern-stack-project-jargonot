@@ -9,12 +9,16 @@ news articles and research papers more accessible to
 students by simplifying technical jargon and explaining
 complex concepts.
 
+## Interactive Prototype
+
+[View the Jargonot Interactive Prototype](https://www.figma.com/design/iMa4u6Mi9Vpq5OBIjp22u0/Jargonot---Sprint-0-Prototype?t=3vC4fvafPrPs9oS2-1)
+
 ## App Map
 
 The app map illustrates how users navigate between
 the different screens of Jargonot.
 
-<!-- App map image to  be added here -->
+![Jargonot App Map](ux-design/JargonotAppMap.png)
 
 ## Wireframes
 
