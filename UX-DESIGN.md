@@ -11,7 +11,7 @@ complex concepts.
 
 ## Interactive Prototype
 
-[View the Jargonot Interactive Prototype](https://www.figma.com/design/iMa4u6Mi9Vpq5OBIjp22u0/Jargonot---Sprint-0-Prototype?t=3vC4fvafPrPs9oS2-1)
+[View the Jargonot Interactive Prototype](https://www.figma.com/design/iMa4u6Mi9Vpq5OBIjp22u0/Jargonot---Sprint-0-Prototype?t=FYwsODxmOd2CdPmb-1)
 
 ## App Map
 
