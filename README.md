@@ -1,19 +1,33 @@
-# Project Repository
+# Jargonot 
+Jargonot is a mobile web app that makes complex research papers more accessible for students and researchers by allowing users to filter by their interests, summarizing the content of the paper, simplifying the language used in the paper, and letting users save helpful papers. 
 
-This repository will be used for team projects.
 
-Several sets of instructions are included in this repository. They should each be treated as separate assignments with their own due dates and sets of requirements.
+## Product Vision Statement
 
-1. See the [App Map & Wireframes](instructions-0a-app-map-wireframes.md) and [Prototyping](./instructions-0b-prototyping.md) instructions for the requirements of the initial user experience design of the app.
+Jargonot aims to be the primary resource to help students explore  new areas of research and understand papers from outside of their field of expertise. 
 
-1. Delete the contents of this file and replace with the contents of a proper README.md, as described in the [project setup instructions](./instructions-0c-project-setup.md)
+It will employ a search and filter system, so users can easily find and access papers that match their needs, and a favorite system, so users can easily keep and locate papers they found useful. Users will be able to view the original paper as well as a "de-jargoned" version that simplifies complex language and improves readability for a non-expert. They will also be able to view a summary to quickly determine if the paper fits within their interests. 
 
-1. See the [Sprint Planning instructions](instructions-0d-sprint-planning.md) for the requirements of Sprint Planning for each Sprint.
+## Team Members
+Name           | GitHub Username
+---------------|----------------------------------------
+Kenny Buchanan | [kennybuchanan](https://github.com/kennybuchanan)
+Saudha Shaheen | [saudhashaheen](https://github.com/saudhashaheen)
+Tim Xu         | [TimXu2006](https://github.com/TimXu2006)
+Francois Ni    | [Nip403](https://github.com/nip403)
 
-1. See the [Front-End Development instructions](./instructions-1-front-end.md) for the requirements of the initial Front-End Development.
+## Project Origins 
+The idea started as a collaboration between [Aditi Adhikari](https://github.com/aditiadhikari05) and [Saudha Shaheen](https://github.com/saudhashaheen) in order to help students access information that is outside of their field of expertise. It seeks to make research easier and more accessible. The original product repository can be found [here](https://github.com/AditiAdhikari05/project-proposal).
 
-1. See the [Back-End Development instructions](./instructions-2-back-end.md) for the requirements of the initial Back-End Development.
+## Contributing
 
-1. See the [Database Integration instructions](./instructions-3-database.md) for the requirements of integrating a database into the back-end.
+Our team uses a feature-branch workflow: developing changes in seaprate branches and creating a single product through pull requests. 
 
-1. See the [Deployment instructions](./instructions-4-deployment.md) for the requirements of deploying an app.
+For further details on our collaboration norms, please refer to [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+## Build & Test
+
+TBD
+
+## Resources
+[arXiv Computing Research Repository](https://info.arxiv.org/help/cs/index.html).
