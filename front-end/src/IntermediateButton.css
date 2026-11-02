@@ -1,0 +1,11 @@
+.IntermediateButton {
+  text-align: center;
+  margin: 10px; /* spacing around the button */
+  cursor: pointer; /* change the cursor to make it look like a link */
+}
+
+.IntermediateButton:hover {
+  /* change the background color when a user hovers */
+  background-color: #505050;
+  color: white;
+}
