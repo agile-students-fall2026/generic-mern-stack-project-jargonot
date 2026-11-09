@@ -3,9 +3,17 @@ import { Link } from "react-router-dom";
 import { fetchArticles } from "./mock_data";
 export default function MainPage() {
   const userName = "Jon";
-  const topics = ["topic1", "topic2"];
+  const allTopics = ["AI/ML", "Cybersecurity", "Algorithms", "Computer Vision"];
+  const [topics, setTopics] = useState(["AI/ML", "Algorithms"]);
+  const [isTopicPickerOpen, setIsTopicPickerOpen] = useState(false);
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
+  const availableTopics = allTopics.filter((topic) => !topics.includes(topic));
+
+  const handleAddTopic = (topic) => {
+    setTopics((currentTopics) => [...currentTopics, topic]);
+    setIsTopicPickerOpen(false);
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -66,21 +74,67 @@ export default function MainPage() {
           <h3 className="mb-4 text-xl font-bold">Your Topics</h3>
           <div className="flex flex-wrap gap-3">
             {topics.map((topic) => (
-              <button
+              <Link
                 key={topic}
+                to={`/articles?topic=${encodeURIComponent(topic)}`}
                 className="rounded-lg border border-purple-200 px-4 py-2 font-medium text-purple-700 hover:bg-purple-50"
               >
                 {topic}
-              </button>
+              </Link>
             ))}
             <button
+              type="button"
               aria-label="Add topic"
               className="rounded-lg bg-purple-600 px-4 py-2 font-semibold text-white hover:bg-purple-700"
+              onClick={() => setIsTopicPickerOpen(true)}
             >
               +
             </button>
           </div>
         </section>
+
+        {isTopicPickerOpen && (
+          <div className="fixed inset-0 z-10 flex items-center justify-center bg-black/50 p-4">
+            <section
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="topic-picker-title"
+              className="w-full max-w-md rounded-lg bg-white p-6 shadow-xl"
+            >
+              <div className="mb-4 flex items-center justify-between">
+                <h3 id="topic-picker-title" className="text-xl font-bold">
+                  Add a topic
+                </h3>
+                <button
+                  type="button"
+                  aria-label="Close topic picker"
+                  className="rounded px-2 py-1 text-gray-600 hover:bg-gray-100"
+                  onClick={() => setIsTopicPickerOpen(false)}
+                >
+                  &times;
+                </button>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                {availableTopics.length > 0 ? (
+                  availableTopics.map((topic) => (
+                    <button
+                      key={topic}
+                      type="button"
+                      className="rounded-lg border border-purple-200 px-4 py-2 font-medium text-purple-700 hover:bg-purple-50"
+                      onClick={() => handleAddTopic(topic)}
+                    >
+                      {topic}
+                    </button>
+                  ))
+                ) : (
+                  <p className="text-gray-600">
+                    You have added all available topics.
+                  </p>
+                )}
+              </div>
+            </section>
+          </div>
+        )}
 
         <section className="mb-8">
           <h3 className="mb-4 text-xl font-bold">Today's Pick</h3>
