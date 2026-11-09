@@ -1,26 +1,41 @@
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { fetchArticles } from "./mock_data";
 export default function Favorite() {
-  const favorites = [
-    {
-      id: 1,
-      category: "category1",
-      source: "Title 1",
-      readTime: "5 min read",
-      title: "Sample title 1",
-      excerpt:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-      href: "#",
-    },
-    {
-      id: 2,
-      category: "category2",
-      source: "Title 1",
-      readTime: "10 min read",
-      title: "Sample title 2",
-      excerpt:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-      href: "#",
-    },
-  ];
+  const [favorites, setFavorites] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    let cancelled = false;
+
+    fetchArticles()
+      .then((response) => {
+        if (!cancelled) {
+          setFavorites(response.data.slice(0, 2));
+        }
+      })
+      .catch((error) => {
+        if (!cancelled) {
+          console.error("Failed to fetch articles:", error);
+        }
+      })
+
+      .finally(() => {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const handleRemove = (id) => {
+    setFavorites((previousFavorites) => {
+      return previousFavorites.filter((paper) => paper.id !== id);
+    });
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -41,10 +56,10 @@ export default function Favorite() {
         </section>
 
         <section className="space-y-4">
-          {favorites.length === 0 ? (
-            <p className="rounded-lg border border-gray-200 p-6 text-gray-600">
-              You haven't saved any papers yet.
-            </p>
+          {loading ? (
+            <p>Loading favourites...</p>
+          ) : favorites.length === 0 ? (
+            <p>You haven't saved any papers yet</p>
           ) : (
             favorites.map((paper) => (
               <article
@@ -53,18 +68,24 @@ export default function Favorite() {
               >
                 <div>
                   <p className="mb-2 text-sm text-gray-500">
-                    {paper.category} | {paper.source} | {paper.readTime}
+                    {paper.topic} | {paper.publication} |{" "}
+                    {paper.readingTimeMinutes} min read
                   </p>
                   <h4 className="mb-2 text-lg font-bold">{paper.title}</h4>
-                  <p className="mb-4 text-gray-600">{paper.excerpt}</p>
+                  <p className="mb-4 text-gray-600">{paper.abstract}</p>
                   <div className="flex items-center gap-4">
-                    <a
+                    <Link
                       className="font-semibold text-purple-600 hover:underline"
-                      href={paper.href}
+                      to={`/articles/${paper.id}`}
+                      state={{ article: paper }}
                     >
                       Read Article →
-                    </a>
-                    <button className="text-sm font-medium text-gray-500 hover:text-gray-700">
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => handleRemove(paper.id)}
+                      className="text-sm font-medium text-gray-500 hover:text-gray-700"
+                    >
                       Remove
                     </button>
                   </div>
