@@ -3,6 +3,12 @@ export default function Dashboard() {
 
   const cards = [
     {
+      title: "Home",
+      description: "Go back to Home",
+      linkText: "Return Home",
+      href: "/mainpage",
+    },
+    {
       title: "My Favorites",
       description: "View your saved papers",
       linkText: "View Favorites",
@@ -26,7 +32,8 @@ export default function Dashboard() {
     <div className="min-h-screen bg-white">
       <header className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
         <h2 className="text-xl font-bold text-purple-600">Jargonot</h2>
-        <a className="font-semibold text-purple-600 hover:underline"
+        <a
+          className="font-semibold text-purple-600 hover:underline"
           href="/login"
         >
           Log Out
