@@ -1,17 +1,34 @@
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { fetchArticles } from "./mock_data";
 export default function MainPage() {
   const userName = "Jon";
   const topics = ["topic1", "topic2"];
+  const [article, setArticle] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const todaysPick = {
-    image: null,
-    category: "topic1",
-    source: "A source",
-    readTime: "10 min read",
-    title: "Sample Topic",
-    excerpt:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-  };
+  useEffect(() => {
+    let cancelled = false;
 
+    fetchArticles()
+      .then((response) => {
+        if (!cancelled) {
+          setArticle(response.data[0]);
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to fetch article:", error);
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
   return (
     <div className="min-h-screen bg-white">
       <header className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
@@ -31,7 +48,10 @@ export default function MainPage() {
         </section>
 
         <section className="mb-8">
-          <label className="mb-2 block text-sm font-medium" htmlFor="search-input">
+          <label
+            className="mb-2 block text-sm font-medium"
+            htmlFor="search-input"
+          >
             Search a topic or article&nbsp;
           </label>
           <input
@@ -64,37 +84,45 @@ export default function MainPage() {
 
         <section className="mb-8">
           <h3 className="mb-4 text-xl font-bold">Today's Pick</h3>
-          <article className="overflow-hidden rounded-lg border border-gray-200 md:flex">
-            <div className="flex min-h-48 items-center justify-center bg-purple-50 p-6 text-sm text-gray-500 md:w-1/3">
-              {todaysPick.image ? (
+
+          {loading ? (
+            <p className="text-gray-600">Loading today's article...</p>
+          ) : article ? (
+            <article className="overflow-hidden rounded-lg border border-gray-200 md:flex">
+              <div className="flex min-h-48 items-center justify-center bg-purple-50 md:w-1/3">
                 <img
                   className="h-full w-full object-cover"
-                  src={todaysPick.image}
-                  alt={todaysPick.title}
+                  src={article.thumbnailUrl}
+                  alt={article.title}
                 />
-              ) : (
-                <span>Placeholder Image</span>
-              )}
-            </div>
-            <div className="p-6 md:flex-1">
-              <p className="mb-2 text-sm text-gray-500">
-                {todaysPick.category} | {todaysPick.source} | {todaysPick.readTime}
-              </p>
-              <h4 className="mb-2 text-lg font-bold">{todaysPick.title}</h4>
-              <p className="mb-4 text-gray-600">{todaysPick.excerpt}</p>
-              <a
-                className="font-semibold text-purple-600 hover:underline"
-                href="./article"
-              >
-                Read Article
-              </a>
-            </div>
-          </article>
-        </section>
+              </div>
 
-        <a 
+              <div className="p-6 md:flex-1">
+                <p className="mb-2 text-sm text-gray-500">
+                  {article.topic} | {article.publication} |{" "}
+                  {article.readingTimeMinutes} min read
+                </p>
+
+                <h4 className="mb-2 text-lg font-bold">{article.title}</h4>
+
+                <p className="mb-4 text-gray-600">{article.abstract}</p>
+
+                <Link
+                  to={`/articles/${article.id}`}
+                  state={{ article: article }}
+                  className="font-semibold text-purple-600 hover:underline"
+                >
+                  Read Article →
+                </Link>
+              </div>
+            </article>
+          ) : (
+            <p className="text-gray-600">Today's article is unavailable.</p>
+          )}
+        </section>
+        <a
           className="rounded-lg bg-purple-600 px-5 py-3 font-semibold text-white hover:bg-purple-700"
-          href = "/articles"
+          href="/articles"
         >
           Browse All Articles
         </a>
