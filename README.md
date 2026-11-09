@@ -27,7 +27,17 @@ For further details on our collaboration norms, please refer to [CONTRIBUTING.md
 
 ## Build & Test
 
-TBD
+To deploy and test Jargonot locally, first clone this repo and enter the frontend:
+```
+git clone https://github.com/agile-students-fall2026/generic-mern-stack-project-jargonot.git
+cd front-end
+```
+
+Then use npm to install packages and run the app:
+```
+npm install
+npm run dev
+```
 
 ## Resources
 [arXiv Computing Research Repository](https://info.arxiv.org/help/cs/index.html).
