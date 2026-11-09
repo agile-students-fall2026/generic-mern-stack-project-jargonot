@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { fetchArticles, searchArticles } from './mock_data'
 import ArticleCard from './ArticleCard'
 
@@ -10,8 +10,14 @@ const Catalog = () => {
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
-  const [topic, setTopic] = useState('All')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const requestedTopic = searchParams.get('topic')
+  const topic = topics.includes(requestedTopic) ? requestedTopic : 'All'
   const [page, setPage] = useState(1)
+
+  useEffect(() => {
+    setPage(1)
+  }, [topic])
 
   // on initial load
   useEffect(() => {
@@ -28,8 +34,7 @@ const Catalog = () => {
   }
 
   const handleTopicClick = newTopic => {
-    setTopic(newTopic)
-    setPage(1)
+    setSearchParams(newTopic === 'All' ? {} : { topic: newTopic })
   }
 
   const handlePageClick = newPage => {
