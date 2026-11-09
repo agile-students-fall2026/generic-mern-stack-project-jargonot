@@ -40,7 +40,9 @@ export default function MainPage() {
   return (
     <div className="min-h-screen bg-white">
       <header className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
-        <h2 className="text-xl font-bold text-purple-600">Jargonot</h2>
+        <h2 className="text-xl font-bold text-purple-600">
+          <Link to="/mainpage">Jargonot</Link>
+        </h2>
         <a
           className="font-semibold text-purple-600 hover:underline"
           href="/dashboard"
