@@ -27,9 +27,24 @@ For further details on our collaboration norms, please refer to [CONTRIBUTING.md
 
 ## Build & Test
 
-To deploy and test Jargonot locally, first clone this repo and enter the frontend:
+To deploy and test Jargonot locally, first clone this repo:
 ```
 git clone https://github.com/agile-students-fall2026/generic-mern-stack-project-jargonot.git
+```
+
+Then, enter the backend:
+```
+cd back-end
+```
+
+Use npm to install packages and start connection:
+```
+npm install
+npm start
+```
+
+In a new terminal, navigate to the frontend:
+```
 cd front-end
 ```
 
