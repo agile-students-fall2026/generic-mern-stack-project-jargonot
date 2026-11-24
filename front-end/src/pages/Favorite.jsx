@@ -1,26 +1,27 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import BackButton from './Back_Button';
-import { fetchArticles } from "./mock_data";
+import axios from "axios";
 export default function Favorite() {
   const [favorites, setFavorites] = useState([]);
-
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     let cancelled = false;
 
-    fetchArticles()
+    axios
+      .get("/api/favorites")
       .then((response) => {
         if (!cancelled) {
-          setFavorites(response.data.slice(0, 2));
+          setFavorites(response.data.data);
         }
       })
       .catch((error) => {
         if (!cancelled) {
-          console.error("Failed to fetch articles:", error);
+          setError(error.message);
         }
       })
-
       .finally(() => {
         if (!cancelled) {
           setLoading(false);
@@ -32,10 +33,17 @@ export default function Favorite() {
     };
   }, []);
 
-  const handleRemove = (id) => {
-    setFavorites((previousFavorites) => {
-      return previousFavorites.filter((paper) => paper.id !== id);
-    });
+  const handleRemove = async (id) => {
+    const previous = favorites;
+    setFavorites((current) => current.filter((paper) => paper.id !== id));
+
+    try {
+      const response = await axios.delete(`/api/favorites/${id}`);
+      setFavorites(response.data.data);
+    } catch (err) {
+      setFavorites(previous);
+      setError(err.message);
+    }
   };
 
   return (
