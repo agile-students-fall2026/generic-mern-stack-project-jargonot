@@ -70,6 +70,7 @@ export default function Favorite() {
         </section>
 
         <section className="space-y-4">
+          {error && <p className="mb-4 text-red-600">{error}</p>}
           {loading ? (
             <p>Loading favourites...</p>
           ) : favorites.length === 0 ? (
