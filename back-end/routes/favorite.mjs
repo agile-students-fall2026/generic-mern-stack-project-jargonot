@@ -38,6 +38,7 @@ export function recommendArticle() {
 }
 
 export function getRecommendation() {
+  recommendation.isFavorite = false;
   return recommendation;
 }
 
@@ -47,7 +48,9 @@ each other in the articles data, it will be necessary to filter through all arti
 */
 const listFavorites = () => {
   const articles = getArticles();
-  return articles.filter((a) => favoriteIds.has(String(a.id)));
+  const favorites = articles.filter((a) => favoriteIds.has(String(a.id)));
+  favorites.forEach((a) => (a.isFavorite = true));
+  return favorites
 };
 
 router.get("/", (_req, res) => {
