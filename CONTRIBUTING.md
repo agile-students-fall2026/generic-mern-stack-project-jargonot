@@ -41,9 +41,43 @@ To set up the local enviornment, first clone the repository.
 git clone https://github.com/agile-students-fall2026/generic-mern-stack-project-jargonot.git
 cd generic-mern-stack-project-jargonot
 ```
+Then, install/update the npm packages needed for both frontend and backend.
+
+```
+cd front-end
+npm install
+cd ../back-end
+npm install
+```
 
 ... TBD
 
 ## Building and testing
 
-TBD
+To deploy and test Jargonot locally, first clone this repo:
+```
+git clone https://github.com/agile-students-fall2026/generic-mern-stack-project-jargonot.git
+cd generic-mern-stack-project-jargonot
+```
+
+Then, enter the backend:
+```
+cd back-end
+```
+
+Use npm to install packages and start connection:
+```
+npm install
+npm start
+```
+
+In a new terminal, navigate to the frontend:
+```
+cd front-end
+```
+
+Then use npm to install packages and run the app:
+```
+npm install
+npm run dev
+```
