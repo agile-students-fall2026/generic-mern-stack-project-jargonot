@@ -30,6 +30,7 @@ For further details on our collaboration norms, please refer to [CONTRIBUTING.md
 To deploy and test Jargonot locally, first clone this repo:
 ```
 git clone https://github.com/agile-students-fall2026/generic-mern-stack-project-jargonot.git
+cd generic-mern-stack-project-jargonot
 ```
 
 Then, enter the backend:
