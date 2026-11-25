@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { fetchArticles } from "./mock_data";
 import axios from "axios";
 
 export default function MainPage() {
-  const [userName, setUsername] = useState("");
+  const [username, setUsername] = useState("");
   const allTopics = ["AI/ML", "Cybersecurity", "Algorithms", "Computer Vision"];
   const [topics, setTopics] = useState(["AI/ML", "Algorithms"]);
   const [isTopicPickerOpen, setIsTopicPickerOpen] = useState(false);
@@ -20,14 +19,17 @@ export default function MainPage() {
   useEffect(() => {
     let cancelled = false;
 
-    fetchArticles()
+    axios
+      .get("/api/favorites/recommended")
       .then((response) => {
         if (!cancelled) {
-          setArticle(response.data[0]);
+          setArticle(response.data.data);
         }
       })
       .catch((error) => {
-        console.error("Failed to fetch article:", error);
+        if (!cancelled) {
+          console.error("Failed to fetch article:", error);
+        }
       })
       .finally(() => {
         if (!cancelled) {
@@ -67,7 +69,7 @@ export default function MainPage() {
 
       <main className="mx-auto w-full max-w-4xl px-6 py-10">
         <section className="mb-8">
-          <h1 className="mb-1 text-3xl font-bold">Hi {userName}!</h1>
+          <h1 className="mb-1 text-3xl font-bold">Hi {username}!</h1>
           <p className="text-gray-600">What do you want to learn today?</p>
         </section>
 
