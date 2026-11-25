@@ -38,6 +38,24 @@ Then, enter the backend:
 cd back-end
 ```
 
+For backend deployment, you need to set up your .env file:
+1. Duplicate the `.env.example` file located in the `back-end` folder, and rename it to `.env`.
+2. Set up your Mockaroo account. For graders, skip this to (3).
+    - Create a Mockaroo account if you haven't already.
+    - Open [our shared schema](https://mockaroo.com/befa3120) and clone/save it to your account.
+    - Create a Mock API endpoint called jargonot_research_articles and add this:
+    ```
+    schema "Jargonot Research Articles"
+    generate 20
+    ```
+    - You can check your `MOCKAROO_API_KEY` and `MOCKAROO_API_URL` on your API page.
+3. Fill in the fields of the `.env` file according to your Mockaroo info. We have already set up an account for graders:
+```
+MOCKAROO_API_KEY=b6cb4c50
+MOCKAROO_API_URL=https://my.api.mockaroo.com/jargonot_research_articles.json
+PORT=3001
+```
+
 Use npm to install packages and start connection:
 ```
 npm install
@@ -54,6 +72,9 @@ Then use npm to install packages and run the app:
 npm install
 npm run dev
 ```
+
+### Testing
+From the `back-end` directory, run `npm test`.
 
 ## Resources
 [arXiv Computing Research Repository](https://info.arxiv.org/help/cs/index.html).
